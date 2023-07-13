@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, AppBar, Typography, Grow, Grid} from '@mui/material'
 import memories from './components/images/memories.png'
 import Posts from "./components/Posts/Posts"
 import Form from "./components/Forms/Form"
+import { useDispatch } from 'react-redux'
+import { getPosts } from './features/posts/postSlice'
 
 const App = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getPosts())
+    }, [])
     return(
         <Container maxWidth="lg">
             <AppBar position="static" color="inherit">
                 <Typography variant="h2" align="center">Memories</Typography>
-                <img src={memories} alt="memories" height="60"></img>
+                <img src={memories} alt="memories" height="400"></img>
             </AppBar>
             <Grow in>
                 <Container>
