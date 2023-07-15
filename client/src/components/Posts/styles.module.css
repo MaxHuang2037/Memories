@@ -1,7 +1,19 @@
-.container{
+.memory{
+    border-style: dashed;
+    width: 20vw;
+    padding: 0 1rem 0 1rem
+}
+
+.row{
     display: flex;
-    flex-direction: column;
-    border-style: solid;
-    flex-grow: 1;
-    margin-right: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.image{
+    width: 20vw;
+}
+
+.upper{
+    border-bottom: solid;
 }

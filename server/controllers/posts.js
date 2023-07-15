@@ -13,8 +13,18 @@ export const createPost = async (req, res) => {
     const body = req.body;
     try {
         const newPost = await PostMessage.create(body)
-        res.status(201).json(newPost)
+        res.status(200).json(newPost)
     } catch (error) {
         res.status(409).json({message: err.message})
+    }
+}
+
+export const deletePost = async (req, res) => {
+    const body = req.body
+    try {
+        const post = await PostMessage.findOneAndDelete(body)
+        res.status(200).json(post)
+    } catch(err) {
+        res.status(404).json({message: err.message})
     }
 }
