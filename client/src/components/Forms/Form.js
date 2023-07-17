@@ -1,18 +1,25 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import FileBase from 'react-file-base64'
-import { useDispatch } from "react-redux"
-import { createPost } from "../../features/posts/postSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { createPost, updatePost, setCurrentPostId } from "../../features/posts/postSlice"
 import styles from './styles.module.css'
 
 const Form = () => {
+    const dispatch = useDispatch()
+    const {currentPostId, posts} = useSelector((state) => state.post)
     const [postData, setPostData] = useState({
         creator: '', title: '', message: '', tags: '', selectedFile: ''
     })
-    const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(createPost(postData))
+        if (currentPostId){
+            dispatch(updatePost({id: currentPostId, post: postData}))
+            dispatch(setCurrentPostId(null))
+        }
+        else {
+            dispatch(createPost(postData))
+        }
         setPostData({
             creator: '', title: '', message: '', tags: '', selectedFile: ''
         })
@@ -25,9 +32,23 @@ const Form = () => {
         })
     }
 
+    useEffect(() => {
+        if (currentPostId){
+            const currentPost = posts.find((post) => post._id === currentPostId)
+            setPostData({
+                creator: currentPost.creator, title: currentPost.title, message: currentPost.message, tags: currentPost.tags, selectedFile: currentPost.selectedFile
+            })
+        }
+        else{
+            setPostData({
+                creator: '', title: '', message: '', tags: '', selectedFile: ''
+            })
+        }
+    }, [currentPostId])
+
     return(
         <form className={styles.postForm} onSubmit={handleSubmit}>
-            <h2>Creating a memory</h2>
+            <h2>{currentPostId ? 'Editing' : 'Creating'} a memory</h2>
             <input className={styles.input} name="creator" placeholder="creator" value={postData.creator}
             onChange={(e) => setPostData({...postData, creator: e.target.value})}></input>
             <input className={styles.input} name="title" placeholder="title" value={postData.title}
