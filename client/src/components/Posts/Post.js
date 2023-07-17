@@ -6,8 +6,9 @@ import moment from 'moment'
 const Post = ({data}) => {
     const dispatch = useDispatch()
     const {currentPostId} = useSelector((state) => state.post)
-
+    
     const handleEdit = () => {
+        console.log(data.createdAt)
         if (currentPostId){
             return dispatch(setCurrentPostId(null))
         }
