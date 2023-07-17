@@ -5,7 +5,6 @@ const Posts = () => {
     const {posts} = useSelector((state) => state.post)
     return(
         <section className={styles.container}>
-            <h1>Posts</h1>
             {
                 (posts === undefined) ? 
                 <h1>Loading...</h1> :

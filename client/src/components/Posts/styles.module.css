@@ -1,7 +1,8 @@
 .memory{
     border-style: dashed;
     width: 20vw;
-    padding: 0 1rem 0 1rem
+    padding: 0 1rem 1rem 1rem;
+    margin-right: 0.5rem;
 }
 
 .row{
@@ -16,4 +17,10 @@
 
 .upper{
     border-bottom: solid;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
 }

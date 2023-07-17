@@ -8,7 +8,6 @@ const Post = ({data}) => {
     const {currentPostId} = useSelector((state) => state.post)
     
     const handleEdit = () => {
-        console.log(data.createdAt)
         if (currentPostId){
             return dispatch(setCurrentPostId(null))
         }
@@ -28,9 +27,9 @@ const Post = ({data}) => {
             <div className={styles.lower}>
                 <p>{data.tags}</p>
                 <h2>{data.title}</h2>
-                <h2>{data.message}</h2>
+                <h3>{data.message}</h3>
                 <div className={styles.row}>
-                    <h1 onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount}</h1>
+                    <button onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount}</button>
                     <button onClick={() => {dispatch(deletePost(data))}}>Delete</button>
                 </div>
             </div>
