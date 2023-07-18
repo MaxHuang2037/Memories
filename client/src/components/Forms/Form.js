@@ -48,7 +48,7 @@ const Form = () => {
 
     return(
         <form className={styles.postForm} onSubmit={handleSubmit}>
-            <h2>{currentPostId ? 'Editing' : 'Creating'} a memory</h2>
+            <h2>{currentPostId ? 'Editing' : 'Creating'} a post</h2>
             <input className={styles.input} name="creator" placeholder="creator" value={postData.creator}
             onChange={(e) => setPostData({...postData, creator: e.target.value})}></input>
             <input className={styles.input} name="title" placeholder="title" value={postData.title}

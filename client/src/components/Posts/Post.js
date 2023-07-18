@@ -18,7 +18,7 @@ const Post = ({data}) => {
         <div className={styles.memory}>
             <div className={styles.upper}>
                 <img className={styles.image} src={data.selectedFile} alt="memorypic"></img>
-                <div id={styles.upper} className={styles.row}>
+                <div className={styles.row}>
                     <h2>{data.creator}</h2>
                     <button onClick={handleEdit}>...</button>
                 </div>
@@ -28,7 +28,7 @@ const Post = ({data}) => {
                 <p>{data.tags.split(',').map((tag) => `#${tag.trim()}`)}</p>
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
-                <div className={styles.row}>
+                <div className={styles.row} id={styles.bottom}>
                     <button onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount}</button>
                     <button onClick={() => {dispatch(deletePost(data))}}>Delete</button>
                 </div>

@@ -15,7 +15,7 @@ const App = () => {
     return(
         <main>
             <header className={styles.memories}>
-                <h1>Memories</h1>
+                <h1>Posts</h1>
                 <img className={styles.memories_img} src={memories} alt="memories"></img>
             </header>
             <section className={styles.posts}>

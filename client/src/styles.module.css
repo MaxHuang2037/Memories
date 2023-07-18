@@ -1,6 +1,7 @@
 html{
     background-color: rgb(34, 32, 56);
     color: white;
+    word-wrap: break-word;
 }
 
 body{
