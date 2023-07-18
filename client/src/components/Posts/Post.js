@@ -25,7 +25,7 @@ const Post = ({data}) => {
                 <h3>{moment(data.createdAt).fromNow()}</h3>
             </div>
             <div className={styles.lower}>
-                <p>{data.tags}</p>
+                <p>{data.tags.split(',').map((tag) => `#${tag.trim()}`)}</p>
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
                 <div className={styles.row}>
