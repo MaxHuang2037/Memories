@@ -47,7 +47,7 @@ const Form = () => {
     }, [currentPostId])
 
     return(
-        <form className={styles.postForm} onSubmit={handleSubmit}>
+        <form className={styles.postForm} onSubmit={handleSubmit} autoComplete="off">
             <h2>{currentPostId ? 'Editing' : 'Creating'} a post</h2>
             <input className={styles.input} name="creator" placeholder="creator" value={postData.creator}
             onChange={(e) => setPostData({...postData, creator: e.target.value})}></input>
