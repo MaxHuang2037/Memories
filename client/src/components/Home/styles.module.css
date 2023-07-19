@@ -1,0 +1,7 @@
+.posts{
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    margin-top: 1rem;
+    justify-content: center;
+}

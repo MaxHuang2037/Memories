@@ -49,13 +49,13 @@ const Form = () => {
     return(
         <form className={styles.postForm} onSubmit={handleSubmit} autoComplete="off">
             <h2>{currentPostId ? 'Editing' : 'Creating'} a post</h2>
-            <input className={styles.input} name="creator" placeholder="creator" value={postData.creator}
+            <input className={styles.input} name="creator" placeholder="Creator" value={postData.creator}
             onChange={(e) => setPostData({...postData, creator: e.target.value})}></input>
-            <input className={styles.input} name="title" placeholder="title" value={postData.title}
+            <input className={styles.input} name="title" placeholder="Title" value={postData.title}
             onChange={(e) => setPostData({...postData, title: e.target.value})}></input>
-            <input className={styles.input} name="message" placeholder="message" value={postData.message}
+            <input className={styles.input} name="message" placeholder="Message" value={postData.message}
             onChange={(e) => setPostData({...postData, message: e.target.value})}></input>
-            <input className={styles.input} name="tags" placeholder="tags" value={postData.tags}
+            <input className={styles.input} name="tags" placeholder="Tags (comma seperated)" value={postData.tags}
             onChange={(e) => setPostData({...postData, tags: e.target.value})}></input>
             <div>
                 <FileBase
@@ -64,8 +64,11 @@ const Form = () => {
                     onDone={({base64}) => setPostData({...postData, selectedFile: base64})}>
                 </FileBase>
             </div>
-            <button className={styles.submit_btn} type="submit">Submit</button>
-            <button className={styles.clear_btn} onClick={clear}>Clear</button>
+            <button className={styles.submit_btn} type="submit">
+                {currentPostId ? 'SAVE' : 'SUBMIT'}
+                
+            </button>
+            <button className={styles.clear_btn} onClick={clear}>CLEAR</button>
         </form>
     )
 }

@@ -1,27 +1,18 @@
-import React, { useEffect } from 'react'
-import memories from './components/images/memories.png'
-import Posts from "./components/Posts/Posts"
-import Form from "./components/Forms/Form"
+import Navbar from './components/Navbar/Navbar'
+import Home from './components/Home/Home'
+import Auth from './components/Auth/Auth'
+import { Routes, Route } from 'react-router-dom'
+
 import styles from "./styles.module.css"
-import { useDispatch } from 'react-redux'
-import { getPosts } from './features/posts/postSlice'
 
 const App = () => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getPosts())
-    }, [])
-    return(
+    return (
         <main className={styles.main}>
-            <header className={styles.memories}>
-                <h1>Posts</h1>
-                <img className={styles.memories_img} src={memories} alt="memories"></img>
-            </header>
-            <section className={styles.posts}>
-                <Posts></Posts>
-                <Form></Form>
-            </section>
+            <Navbar/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/auth" element={<Auth/>}/>
+            </Routes>
         </main>
     )
 }

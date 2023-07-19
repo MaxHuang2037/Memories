@@ -10,29 +10,6 @@ html{
     align-items: center;
 }
 
-.memories{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    width: 80vw;
-    background-color: rgb(52, 51, 71);
-}
-
-.memories_img{
-    margin-left: 10px;
-    height: 50px;
-}
-
-.posts{
-    width: 80vw;
-    display: flex;
-    flex-wrap: wrap-reverse;
-    margin-top: 1rem;
-    justify-content: center;
-}
-
-/* all buttons */
 button{
     border: none;
     background: none;
