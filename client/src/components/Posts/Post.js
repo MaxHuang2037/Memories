@@ -28,7 +28,7 @@ const Post = ({data}) => {
                 <p>{data.tags.split(',').map((tag) => `#${tag.trim()}`)}</p>
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
-                <div className={styles.row} id={styles.bottom}>
+                <div className={styles.row}>
                     <button onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount}</button>
                     <button onClick={() => {dispatch(deletePost(data))}}>Delete</button>
                 </div>

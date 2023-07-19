@@ -13,7 +13,7 @@ const App = () => {
         dispatch(getPosts())
     }, [])
     return(
-        <main>
+        <main className={styles.main}>
             <header className={styles.memories}>
                 <h1>Posts</h1>
                 <img className={styles.memories_img} src={memories} alt="memories"></img>
