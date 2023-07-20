@@ -49,13 +49,13 @@ const Form = () => {
     return(
         <form className={styles.postForm} onSubmit={handleSubmit} autoComplete="off">
             <h2>{currentPostId ? 'Editing' : 'Creating'} a post</h2>
-            <input className={styles.input} name="creator" placeholder="Creator" value={postData.creator}
+            <input required className={styles.input} placeholder="Creator" value={postData.creator}
             onChange={(e) => setPostData({...postData, creator: e.target.value})}></input>
-            <input className={styles.input} name="title" placeholder="Title" value={postData.title}
+            <input required className={styles.input} placeholder="Title" value={postData.title}
             onChange={(e) => setPostData({...postData, title: e.target.value})}></input>
-            <input className={styles.input} name="message" placeholder="Message" value={postData.message}
+            <input required className={styles.input} placeholder="Message" value={postData.message}
             onChange={(e) => setPostData({...postData, message: e.target.value})}></input>
-            <input className={styles.input} name="tags" placeholder="Tags (comma seperated)" value={postData.tags}
+            <input required className={styles.input} placeholder="Tags (comma seperated)" value={postData.tags}
             onChange={(e) => setPostData({...postData, tags: e.target.value})}></input>
             <div>
                 <FileBase

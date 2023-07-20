@@ -1,7 +1,8 @@
 .navbar{
     display: flex;
+    box-sizing: border-box;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 0.5rem 4rem 0.5rem 4rem;
     align-items: center;
     border-radius: 1rem;
     width: 80vw;
@@ -16,4 +17,13 @@
 .brand{
     display: flex;
     align-items: center;
+}
+
+.home{
+    font-size: 40px;
+}
+
+.signIn{
+    background-color: rgb(15, 15, 38);
+    padding: 0.5rem;
 }

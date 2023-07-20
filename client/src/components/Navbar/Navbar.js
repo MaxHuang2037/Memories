@@ -8,8 +8,8 @@ const Navbar = () => {
     return (
         <header className={styles.navbar}>
             <div className={styles.brand}>
-                <Link className={styles.home} to="/">
-                    <button>Posts</button>
+                <Link to="/">
+                    <button className={styles.home}>Posts</button>
                 </Link>
                 <img className={styles.navbar_img} src={memories} alt="memories"></img>
             </div>
@@ -21,7 +21,7 @@ const Navbar = () => {
                         <button>Log Out</button>
                     </div> :
                     <Link to="/auth">
-                        <button>Sign In</button>
+                        <button className={styles.signIn}>Sign In</button>
                     </Link>
                 }
             </div>
