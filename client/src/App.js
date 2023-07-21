@@ -3,14 +3,12 @@ import Home from './components/Home/Home'
 import Auth from './components/Auth/Auth'
 import { Routes, Route } from 'react-router-dom'
 import {GoogleOAuthProvider} from "@react-oauth/google"
-import dotenv from "dotenv"
 
 import styles from "./styles.module.css"
 
-dotenv.config()
 const App = () => {
     return (
-        <GoogleOAuthProvider clientId={`${process.env.GOOGLE_API_TOKEN}`}>
+        <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}>
             <main className={styles.main}>
                 <Navbar/>
                 <Routes>

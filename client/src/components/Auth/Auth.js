@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Input from "./Input"
 import styles from "./styles.module.css"
+import { GoogleLogin, googleLogout } from '@react-oauth/google'
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -35,6 +36,7 @@ const Auth = () => {
                 <button onClick={switchMode}>
                     {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
                 </button>
+                <GoogleLogin></GoogleLogin>
             </form>
         </section>
     )
