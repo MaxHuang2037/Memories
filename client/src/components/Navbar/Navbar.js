@@ -1,9 +1,23 @@
-import memories from '../images/posts.png'
-import styles from './styles.module.css'
-import {Link} from 'react-router-dom'
+import { useEffect, useState } from "react"
+import memories from "../images/posts.png"
+import styles from "./styles.module.css"
+import {Link} from "react-router-dom"
 
 const Navbar = () => {
-    const user = null
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")))
+    
+    const logOut = () => {
+        localStorage.clear()
+        setUser(null)
+    }
+
+    useEffect(() => {
+        // const token = user.token
+
+        // jwt 
+        console.log(user)
+        setUser(JSON.parse(localStorage.getItem("profile")))
+    }, [])
 
     return (
         <header className={styles.navbar}>
@@ -15,13 +29,13 @@ const Navbar = () => {
             </div>
             <div className={styles.toolbar}>
                 {user ? 
-                    <div>
-                        <img alt={user.result.name} src={user.result.imageURL}></img>
-                        <h1>{user.result.name}</h1>
-                        <button>Log Out</button>
+                    <div className={styles.loggedIn}>
+                        <h1 className={styles.username}>{user.name}</h1>
+                        <img className={styles.pfp} alt={user.name} src={user.picture}></img>
+                        <button onClick={logOut} className={styles.log_btn}>Log Out</button>
                     </div> :
                     <Link to="/auth">
-                        <button className={styles.signIn}>Sign In</button>
+                        <button className={styles.log_btn}>Sign In</button>
                     </Link>
                 }
             </div>

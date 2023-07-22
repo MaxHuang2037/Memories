@@ -1,7 +1,8 @@
 import { useState } from "react"
 import Input from "./Input"
 import styles from "./styles.module.css"
-import { GoogleLogin, googleLogout } from '@react-oauth/google'
+import { GoogleLogin } from "@react-oauth/google"
+import jwt_decode from "jwt-decode"
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -15,6 +16,16 @@ const Auth = () => {
         e.preventDefault()
         setSignUp((prev) => !prev)
         setShowPassword(false)
+    }
+
+    const googleSuccess = async (res) => {
+        const data = jwt_decode(res.credential)
+        localStorage.setItem("profile", JSON.stringify({...data, token: res.credential}))
+        window.location.href = "/"
+    }
+
+    const googleError = (err) => {
+        console.log("Google Sign In was unsuccessful")
     }
 
     return(
@@ -33,10 +44,10 @@ const Auth = () => {
                 <button className={styles.submit_btn} type="submit">
                     {isSignup ? "Sign Up" : "Sign In"}
                 </button>
+                <GoogleLogin onSuccess={googleSuccess} onError={googleError}/>
                 <button onClick={switchMode}>
                     {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
                 </button>
-                <GoogleLogin></GoogleLogin>
             </form>
         </section>
     )

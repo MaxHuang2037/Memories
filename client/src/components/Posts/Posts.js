@@ -1,5 +1,5 @@
 import Post from "./Post"
-import {useSelector} from 'react-redux'
+import {useSelector} from "react-redux"
 import styles from "./styles.module.css"
 const Posts = () => {
     const {posts} = useSelector((state) => state.post)

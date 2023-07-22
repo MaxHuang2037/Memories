@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
-import FileBase from 'react-file-base64'
+import FileBase from "react-file-base64"
 import { useDispatch, useSelector } from "react-redux"
 import { createPost, updatePost, setCurrentPostId } from "../../features/posts/postSlice"
-import styles from './styles.module.css'
+import styles from "./styles.module.css"
 
 const Form = () => {
     const dispatch = useDispatch()
     const {currentPostId, posts} = useSelector((state) => state.post)
     const [postData, setPostData] = useState({
-        creator: '', title: '', message: '', tags: '', selectedFile: ''
+        creator: "", title: "", message: "", tags: "", selectedFile: ""
     })
 
     const handleSubmit = (e) => {
@@ -21,14 +21,14 @@ const Form = () => {
             dispatch(createPost(postData))
         }
         setPostData({
-            creator: '', title: '', message: '', tags: '', selectedFile: ''
+            creator: "", title: "", message: "", tags: "", selectedFile: ""
         })
     }
 
     const clear = (e) => {
         e.preventDefault()
         setPostData({
-            creator: '', title: '', message: '', tags: '', selectedFile: ''
+            creator: "", title: "", message: "", tags: "", selectedFile: ""
         })
     }
 
@@ -41,14 +41,14 @@ const Form = () => {
         }
         else{
             setPostData({
-                creator: '', title: '', message: '', tags: '', selectedFile: ''
+                creator: "", title: "", message: "", tags: "", selectedFile: ""
             })
         }
     }, [currentPostId])
 
     return(
         <form className={styles.postForm} onSubmit={handleSubmit} autoComplete="off">
-            <h2>{currentPostId ? 'Editing' : 'Creating'} a post</h2>
+            <h2>{currentPostId ? "Editing" : "Creating"} a post</h2>
             <input required className={styles.input} placeholder="Creator" value={postData.creator}
             onChange={(e) => setPostData({...postData, creator: e.target.value})}></input>
             <input required className={styles.input} placeholder="Title" value={postData.title}
@@ -65,7 +65,7 @@ const Form = () => {
                 </FileBase>
             </div>
             <button className={styles.submit_btn} type="submit">
-                {currentPostId ? 'SAVE' : 'SUBMIT'}
+                {currentPostId ? "SAVE" : "SUBMIT"}
                 
             </button>
             <button className={styles.clear_btn} onClick={clear}>CLEAR</button>

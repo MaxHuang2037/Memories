@@ -23,7 +23,24 @@
     font-size: 40px;
 }
 
-.signIn{
+.log_btn{
     background-color: rgb(15, 15, 38);
     padding: 0.5rem;
+}
+
+.loggedIn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pfp{
+    width: 48px;
+    border-radius: 2rem;
+    margin-right: 2rem;
+}
+
+.username{
+    font-size: 20px;
+    margin-right: 2rem;
 }

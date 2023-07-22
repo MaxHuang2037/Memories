@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { getPosts } from '../../features/posts/postSlice'
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { getPosts } from "../../features/posts/postSlice"
 
 import Posts from "../Posts/Posts"
 import Form from "../Forms/Form"

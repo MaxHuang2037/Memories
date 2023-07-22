@@ -16,10 +16,10 @@ export const createPost = createAsyncThunk("post/createPost",
     async (data) => {
         try {
             const res = await fetch("/posts", {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data)
             })
@@ -34,10 +34,10 @@ export const deletePost = createAsyncThunk("post/deletePost",
     async (post) => {
         try {
             const res = await fetch("/posts", {
-                method: 'DELETE',
+                method: "DELETE",
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(post)
             })
@@ -52,10 +52,10 @@ export const updatePost = createAsyncThunk("post/updatePost",
     async (data) => {
         try {
             const res = await fetch(`/posts/${data.id}`, {
-                method: 'PATCH',
+                method: "PATCH",
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data.post)
             })
@@ -73,7 +73,7 @@ const initialState = {
 }
 
 const postSlice = createSlice({
-    name: 'post',
+    name: "post",
     initialState,
     reducers: {
         setCurrentPostId: (state, {payload}) => {
