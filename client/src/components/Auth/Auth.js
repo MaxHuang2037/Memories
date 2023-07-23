@@ -1,15 +1,31 @@
 import { useState } from "react"
+import { GoogleLogin } from "@react-oauth/google"
 import Input from "./Input"
 import styles from "./styles.module.css"
-import { GoogleLogin } from "@react-oauth/google"
 import jwt_decode from "jwt-decode"
+import { useDispatch } from "react-redux"
+import { signIn, signUp } from "../../features/users/userSlice"
+
+const initialState = {firstName: "", lastName: "", email: "", password: "", confirmPassword: ""}
 
 const Auth = () => {
+    const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState(false)
     const [isSignup, setSignUp] = useState(false)
+    const [formData, setFormData] = useState(initialState)
 
     const handleSubmit = (e) => {
-        
+        e.preventDefault()
+        if(isSignup) {
+            dispatch(signUp(formData))
+        } else {
+            dispatch(signIn(formData))
+        }
+        window.location.href = "/"
+    }
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
     }
 
     const switchMode = (e) => {
@@ -34,13 +50,13 @@ const Auth = () => {
             <form autoComplete="off" onSubmit={handleSubmit} className={styles.form}>
                 { isSignup && (
                     <>
-                        <Input name="First Name"></Input>
-                        <Input name="Last Name"></Input>
+                        <Input placeholder="First Name" handleChange={handleChange} name="firstName"></Input>
+                        <Input placeholder="Last Name" handleChange={handleChange} name="lastName"></Input>
                     </>
                 )}
-                <Input name="Email"></Input>
-                <Input name="Password" setShowPassword={setShowPassword} type={showPassword ? "text" : "password"}></Input>
-                { isSignup && <Input name="Confirm Password" type="password"></Input>}
+                <Input placeholder="Email" handleChange={handleChange} name="email"></Input>
+                <Input placeholder="Password" handleChange={handleChange} name="password" setShowPassword={setShowPassword} type={showPassword ? "text" : "password"}></Input>
+                { isSignup && <Input placeholder="Confirm Password" handleChange={handleChange} name="confirmPassword" type="password"></Input>}
                 <button className={styles.submit_btn} type="submit">
                     {isSignup ? "Sign Up" : "Sign In"}
                 </button>

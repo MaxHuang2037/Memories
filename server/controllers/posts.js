@@ -1,5 +1,5 @@
-import PostMessage from "../models/postSchema.js"
 import mongoose from "mongoose"
+import PostMessage from "../models/postSchema.js"
 
 export const getPosts = async (req, res) => {
     try {
@@ -21,9 +21,9 @@ export const createPost = async (req, res) => {
 }
 
 export const deletePost = async (req, res) => {
-    const body = req.body
+    const {id} = req.body
     try {
-        const post = await PostMessage.findOneAndDelete(body)
+        const post = await PostMessage.findOneAndDelete({_id: id})
         res.status(200).json(post)
     } catch(err) {
         res.status(404).json({message: err.message})

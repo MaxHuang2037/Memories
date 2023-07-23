@@ -1,10 +1,6 @@
 import styles from "./styles.module.css"
 
-const Input = ({name, type, setShowPassword}) => {
-    const handleChange = (e) => {
-        
-    }
-
+const Input = ({name, type, setShowPassword, placeholder, handleChange}) => {
     const handlePassword = (e) => {
         e.preventDefault()
         setShowPassword((prev) => !prev)
@@ -15,12 +11,12 @@ const Input = ({name, type, setShowPassword}) => {
             <input 
                 required
                 className={styles.input}
-                placeholder={name}
-                // value={null}
+                placeholder={placeholder}
+                name={name}
                 onChange={handleChange}
                 type={type}
             ></input>
-            {name === "Password" && <button onClick={handlePassword}>Show Password</button> }
+            {name === "password" && <button onClick={handlePassword}>Show Password</button> }
         </>
     )
 }
