@@ -59,10 +59,19 @@ const userSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder.addCase(signIn.fulfilled, (state, {payload}) => {
+            if(payload.message){
+                return window.alert(payload.message)
+            }
             console.log(payload)
+            localStorage.setItem("profile", JSON.stringify(payload))
+            window.location.href = "/"
         })
         .addCase(signUp.fulfilled, (state, {payload}) => {
-            console.log(payload)
+            if(payload.message){
+                return window.alert(payload.message)
+            }
+            localStorage.setItem("profile", JSON.stringify(payload))
+            window.location.href = "/"
         })
     }
 })

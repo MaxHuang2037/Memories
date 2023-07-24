@@ -15,7 +15,6 @@ const Navbar = () => {
         // const token = user.token
 
         // jwt 
-        console.log(user)
         setUser(JSON.parse(localStorage.getItem("profile")))
     }, [])
 
@@ -30,8 +29,8 @@ const Navbar = () => {
             <div className={styles.toolbar}>
                 {user ? 
                     <div className={styles.loggedIn}>
-                        <h1 className={styles.username}>{user.name}</h1>
-                        <img className={styles.pfp} alt={user.name} src={user.picture}></img>
+                        <h1 className={styles.username}>{user.result.name}</h1>
+                        <img className={styles.pfp} alt={user.result.name} src={user.result.picture}></img>
                         <button onClick={logOut} className={styles.log_btn}>Log Out</button>
                     </div> :
                     <Link to="/auth">

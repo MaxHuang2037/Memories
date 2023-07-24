@@ -21,7 +21,6 @@ const Auth = () => {
         } else {
             dispatch(signIn(formData))
         }
-        window.location.href = "/"
     }
 
     const handleChange = (e) => {

@@ -7,9 +7,10 @@ const postSchema = mongoose.Schema({
     tags: String,
     selectedFile: String,
     likeCount: {
-        type: Number,
-        default: 0
-    }
+        type: [String],
+        default: []
+    },
+    UID: String
 }, { timestamps: true })
 
 const PostMessage = mongoose.model("PostMessage", postSchema)

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { deletePost, likePost, setCurrentPostId } from "../../features/posts/postSlice"
+import { deletePost, setCurrentPostId } from "../../features/posts/postSlice"
 import styles from "./styles.module.css"
 import moment from "moment"
 
@@ -29,8 +29,8 @@ const Post = ({data}) => {
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
                 <div className={styles.row}>
-                    <button onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount}</button>
-                    <button onClick={() => {dispatch(deletePost(data))}}>Delete</button>
+                    <button onClick={() => {}}>Likes: {data.likeCount}</button>
+                    <button onClick={() => dispatch(deletePost(data._id))}>Delete</button>
                 </div>
             </div>
         </div>

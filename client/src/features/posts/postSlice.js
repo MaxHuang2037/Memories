@@ -20,6 +20,7 @@ export const createPost = createAsyncThunk("post/createPost",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
+                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
                 },
                 body: JSON.stringify(data)
             })
@@ -31,15 +32,17 @@ export const createPost = createAsyncThunk("post/createPost",
 )
 
 export const deletePost = createAsyncThunk("post/deletePost", 
-    async (post) => {
+    async (id) => {
         try {
+            console.log(id)
             const res = await fetch("/posts", {
                 method: "DELETE",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
+                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
                 },
-                body: JSON.stringify(post)
+                body: JSON.stringify({id})
             })
             return await res.json()
         } catch (error) {
@@ -56,6 +59,7 @@ export const updatePost = createAsyncThunk("post/updatePost",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
+                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
                 },
                 body: JSON.stringify(data.post)
             })
@@ -78,10 +82,6 @@ const postSlice = createSlice({
     reducers: {
         setCurrentPostId: (state, {payload}) => {
             state.currentPostId = payload
-        }, 
-        likePost: (state, {payload}) => {
-            const post = state.posts.find((post) => post._id === payload)
-            post.likeCount += 1;
         }
     },
     extraReducers: (builder) => {
@@ -101,4 +101,4 @@ const postSlice = createSlice({
 })
 
 export default postSlice.reducer
-export const {setCurrentPostId, likePost} = postSlice.actions
+export const {setCurrentPostId} = postSlice.actions
