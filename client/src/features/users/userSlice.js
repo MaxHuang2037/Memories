@@ -62,7 +62,6 @@ const userSlice = createSlice({
             if(payload.message){
                 return window.alert(payload.message)
             }
-            console.log(payload)
             localStorage.setItem("profile", JSON.stringify(payload))
             window.location.href = "/"
         })

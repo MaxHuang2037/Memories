@@ -34,7 +34,6 @@ export const createPost = createAsyncThunk("post/createPost",
 export const deletePost = createAsyncThunk("post/deletePost", 
     async (id) => {
         try {
-            console.log(id)
             const res = await fetch("/posts", {
                 method: "DELETE",
                 headers: {
