@@ -4,9 +4,9 @@ const userSchema = mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    pfp: {
+    picture: {
         type: String, 
-        default: "picture"
+        default: "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
     },
 }, { timestamps: true })
 
