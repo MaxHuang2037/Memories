@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { getPosts } from "../../features/posts/postSlice"
 
@@ -8,14 +8,20 @@ import styles from "./styles.module.css"
 
 const Home = () => {
     const dispatch = useDispatch()
+    const [currentPostId, setCurrentPostId] = useState(JSON.parse(localStorage.getItem("currentPostId")))
 
     useEffect(() => {
         dispatch(getPosts())
     }, [])
+
+    useEffect(() => {
+        localStorage.setItem("currentPostId", JSON.stringify(currentPostId))
+    }, [currentPostId])
+
     return(
         <section className={styles.posts}>
-            <Posts/>
-            <Form/>
+            <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
+            <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
         </section>
     )
 }

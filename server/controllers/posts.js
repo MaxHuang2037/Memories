@@ -12,9 +12,9 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const body = req.body
-
-    if(!req.userId) return res.json({message: "Unauthenticated"})
     const UID = req.userId
+
+    if(UID === undefined) return res.json({message: "Unauthenticated"})
     try {
         const newPost = await PostMessage.create({...body, UID: UID})
         res.status(200).json(newPost)
@@ -25,9 +25,9 @@ export const createPost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
     const {id} = req.body
-
-    if(!req.userId) return res.json({message: "Unauthenticated"})
     const UID = req.userId
+
+    if(UID === undefined) return res.json({message: "Unauthenticated"})
     try {
         const post = await PostMessage.findOneAndDelete({UID: UID, _id: id})
         res.status(200).json(post)
@@ -38,15 +38,13 @@ export const deletePost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     const {id} = req.params
-
-    if(!req.userId) return res.json({message: "Unauthenticated"})
     const UID = req.userId
 
+    if(UID === undefined) return res.json({message: "Unauthenticated"})
+
     const body = req.body
-    console.log(body)
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).send("No post with that id")
-    }
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with that id")
+
     try {
         const post = await PostMessage.findOneAndUpdate({_id: id, UID: UID}, body, {new: true})
         res.status(200).json(post)
@@ -58,7 +56,7 @@ export const updatePost = async (req, res) => {
 export const likePost = async (req, res) => {
     const {id} = req.params;
 
-    if(!req.userId) return res.json({message: "Unauthenticated"})
+    if(req.userId === undefined) return res.json({message: "Unauthenticated"})
 
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with this id")
@@ -66,13 +64,12 @@ export const likePost = async (req, res) => {
         const post = await PostMessage.findById(id)
 
         const index = post.likeCount.findIndex((id) => id === String(req.userId))
-
         if (index === -1){
             post.likeCount.push(req.userId)
         } else {
-            post.likeCount.filter((id) => id !== String(req.userId))
+            post.likeCount = post.likeCount.filter((id) => (id !== String(req.userId)))
         }
-
+        
         const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true})
 
         res.json(updatedPost)

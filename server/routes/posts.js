@@ -9,6 +9,6 @@ router
 .post("/", auth, createPost)
 .delete("/", auth, deletePost)
 .patch("/:id", auth, updatePost)
-.patch("./:id/likePost", auth, likePost)
+.patch("/:id/likePost", auth, likePost)
 
 export default router

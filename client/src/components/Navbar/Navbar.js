@@ -9,11 +9,10 @@ const Navbar = () => {
     const logOut = () => {
         localStorage.clear()
         setUser(null)
+        window.location.href = "/"
     }
 
     useEffect(() => {
-        // const token = user.token
-
         // jwt 
         setUser(JSON.parse(localStorage.getItem("profile")))
     }, [])

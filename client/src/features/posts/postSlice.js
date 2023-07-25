@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+const token = JSON.parse(localStorage.getItem("profile"))?.token
+
 export const getPosts = createAsyncThunk("post/getPosts", 
     async () => {
         try {
@@ -20,7 +22,7 @@ export const createPost = createAsyncThunk("post/createPost",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
-                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
+                    "authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(data)
             })
@@ -39,7 +41,7 @@ export const deletePost = createAsyncThunk("post/deletePost",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
-                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
+                    "authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({id})
             })
@@ -58,7 +60,7 @@ export const updatePost = createAsyncThunk("post/updatePost",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
-                    "authorization": `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
+                    "authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(data.post)
             })
@@ -69,20 +71,32 @@ export const updatePost = createAsyncThunk("post/updatePost",
     }
 )
 
+export const likePost = createAsyncThunk("post/likePost", 
+    async (id) => {
+        try {
+            const res = await fetch(`/posts/${id}/likePost`, {
+                method: "PATCH",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+            return await res.json()
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+)
+
 const initialState = {
     posts: [],
-    currentPostId: null,
     isLoading: false
 }
 
 const postSlice = createSlice({
     name: "post",
     initialState,
-    reducers: {
-        setCurrentPostId: (state, {payload}) => {
-            state.currentPostId = payload
-        }
-    },
     extraReducers: (builder) => {
         builder.addCase(getPosts.fulfilled, (state, {payload}) => {
             state.posts = payload
@@ -96,8 +110,10 @@ const postSlice = createSlice({
         .addCase(updatePost.fulfilled, (state, {payload}) => {
             state.posts = state.posts.map((post) => post._id === payload._id ? payload : post)
         })
+        .addCase(likePost.fulfilled, (state, {payload}) => {
+            state.posts = state.posts.map((post) => post._id === payload._id ? payload : post)
+        })
     }
 })
 
 export default postSlice.reducer
-export const {setCurrentPostId} = postSlice.actions

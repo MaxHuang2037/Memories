@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from "react-redux"
-import { deletePost, setCurrentPostId } from "../../features/posts/postSlice"
+import { useDispatch } from "react-redux"
+import { deletePost, likePost } from "../../features/posts/postSlice"
 import styles from "./styles.module.css"
 import moment from "moment"
 
-const Post = ({data}) => {
+const Post = ({data, currentPostId, setCurrentPostId}) => {
     const dispatch = useDispatch()
-    const {currentPostId} = useSelector((state) => state.post)
     
     const handleEdit = () => {
         if (currentPostId){
-            return dispatch(setCurrentPostId(null))
+            return setCurrentPostId(null)
         }
-        dispatch(setCurrentPostId(data._id))
+        setCurrentPostId(data._id)
     }
 
     return(
@@ -29,7 +28,7 @@ const Post = ({data}) => {
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
                 <div className={styles.row}>
-                    <button onClick={() => {}}>Likes: {data.likeCount}</button>
+                    <button onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount.length}</button>
                     <button onClick={() => dispatch(deletePost(data._id))}>Delete</button>
                 </div>
             </div>
