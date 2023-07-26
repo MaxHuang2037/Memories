@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { createPost, updatePost } from "../../features/posts/postSlice"
 import styles from "./styles.module.css"
 
-const Form = ({currentPostId, setCurrentPostId}) => {
+const Form = ({currentPostId, setCurrentPostId, user}) => {
     const dispatch = useDispatch()
     const {posts} = useSelector((state) => state.post)
     const [postData, setPostData] = useState({
         title: "", message: "", tags: "", selectedFile: ""
     })
-    const user = JSON.parse(localStorage.getItem("profile"))
 
     const handleSubmit = (e) => {
         e.preventDefault()

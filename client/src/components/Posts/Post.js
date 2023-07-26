@@ -3,9 +3,10 @@ import { deletePost, likePost } from "../../features/posts/postSlice"
 import styles from "./styles.module.css"
 import moment from "moment"
 
-const Post = ({data, currentPostId, setCurrentPostId}) => {
+const Post = ({data, currentPostId, setCurrentPostId, user}) => {
     const dispatch = useDispatch()
-    
+    const isSameUser = user?.result?._id === data?.UID || user?.result?.sub === data?.UID
+
     const handleEdit = () => {
         if (currentPostId){
             return setCurrentPostId(null)
@@ -19,7 +20,7 @@ const Post = ({data, currentPostId, setCurrentPostId}) => {
                 <img className={styles.image} src={data.selectedFile} alt="memorypic"></img>
                 <div className={styles.row}>
                     <h2>{data.creator}</h2>
-                    <button onClick={handleEdit}>...</button>
+                    {isSameUser && <button onClick={handleEdit}>...</button>}
                 </div>
                 <h3>{moment(data.createdAt).fromNow()}</h3>
             </div>
@@ -28,8 +29,8 @@ const Post = ({data, currentPostId, setCurrentPostId}) => {
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
                 <div className={styles.row}>
-                    <button onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount.length}</button>
-                    <button onClick={() => dispatch(deletePost(data._id))}>Delete</button>
+                    <button disabled={!user?.result} onClick={() => dispatch(likePost(data._id))}>Likes: {data.likeCount.length}</button>
+                    {isSameUser && <button onClick={() => dispatch(deletePost(data._id))}>Delete</button>}
                 </div>
             </div>
         </div>

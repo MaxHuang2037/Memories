@@ -6,22 +6,18 @@ import Posts from "../Posts/Posts"
 import Form from "../Forms/Form"
 import styles from "./styles.module.css"
 
-const Home = () => {
+const Home = ({user}) => {
     const dispatch = useDispatch()
-    const [currentPostId, setCurrentPostId] = useState(JSON.parse(localStorage.getItem("currentPostId")))
+    const [currentPostId, setCurrentPostId] = useState(null)
 
     useEffect(() => {
         dispatch(getPosts())
     }, [])
 
-    useEffect(() => {
-        localStorage.setItem("currentPostId", JSON.stringify(currentPostId))
-    }, [currentPostId])
-
     return(
         <section className={styles.posts}>
-            <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
-            <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
+            <Posts user={user} currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
+            <Form user={user} currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>
         </section>
     )
 }

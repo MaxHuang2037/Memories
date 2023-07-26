@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import memories from "../images/posts.png"
 import styles from "./styles.module.css"
 import {Link} from "react-router-dom"
+import jwt_decode from "jwt-decode"
 
-const Navbar = () => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")))
-    
+const Navbar = ({user, setUser}) => {
     const logOut = () => {
         localStorage.clear()
         setUser(null)
-        window.location.href = "/"
     }
 
     useEffect(() => {
         // jwt 
-        setUser(JSON.parse(localStorage.getItem("profile")))
+        const token = user?.token
+        if(token){
+            const decodedToken = jwt_decode(token)
+
+            if (decodedToken.exp * 1000 < new Date().getTime()) logOut()
+        }
     }, [])
 
     return (
