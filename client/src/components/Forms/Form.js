@@ -35,8 +35,9 @@ const Form = ({currentPostId, setCurrentPostId, user}) => {
     useEffect(() => {
         if (currentPostId){
             const currentPost = posts.find((post) => post._id === currentPostId)
+            const tags = currentPost.tags.map((tag) => `${tag.trim()}`)
             setPostData({
-                title: currentPost.title, message: currentPost.message, tags: currentPost.tags, selectedFile: currentPost.selectedFile
+                title: currentPost.title, message: currentPost.message, tags: tags, selectedFile: currentPost.selectedFile
             })
         }
         else{
@@ -56,7 +57,7 @@ const Form = ({currentPostId, setCurrentPostId, user}) => {
                 <input required className={styles.input} placeholder="Message" value={postData.message}
                 onChange={(e) => setPostData({...postData, message: e.target.value})}></input>
                 <input required className={styles.input} placeholder="Tags (comma seperated)" value={postData.tags}
-                onChange={(e) => setPostData({...postData, tags: e.target.value})}></input>
+                onChange={(e) => setPostData({...postData, tags: e.target.value.split(",")})}></input>
                 <div>
                     <FileBase
                         type="file"

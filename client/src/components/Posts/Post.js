@@ -6,6 +6,7 @@ import moment from "moment"
 const Post = ({data, currentPostId, setCurrentPostId, user}) => {
     const dispatch = useDispatch()
     const isSameUser = user?.result?._id === data?.UID || user?.result?.sub === data?.UID
+    const tags = data.tags.map((tag) => `#${tag.trim()}`)
 
     const handleEdit = () => {
         if (currentPostId){
@@ -25,7 +26,7 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
                 <h3>{moment(data.createdAt).fromNow()}</h3>
             </div>
             <div className={styles.lower}>
-                <p>{data.tags.split(",").map((tag) => `#${tag.trim()}`)}</p>
+                <p>{tags}</p>
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
                 <div className={styles.row}>

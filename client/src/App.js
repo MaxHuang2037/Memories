@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar/Navbar"
 import Home from "./components/Home/Home"
 import Auth from "./components/Auth/Auth"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, redirect } from "react-router-dom"
 import {GoogleOAuthProvider} from "@react-oauth/google"
 import { useEffect, useState } from "react"
 
@@ -19,7 +19,7 @@ const App = () => {
             <main className={styles.main}>
                 <Navbar user={user} setUser={setUser}/>
                 <Routes>
-                    <Route path="/" element={<Home user={user}/>}/>
+                    <Route path="/" element={<Home user={user}/> }/>
                     <Route path="/auth" element={<Auth/>}/>
                 </Routes>
             </main>

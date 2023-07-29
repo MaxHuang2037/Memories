@@ -4,9 +4,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const token = JSON.parse(localStorage.getItem("profile"))?.token
 
 export const getPosts = createAsyncThunk("post/getPosts", 
-    async () => {
+    async (page) => {
         try {
-            const res = await fetch("/posts")
+            const res = await fetch(`/posts?page=${page}`)
             return await res.json()
         } catch (err) {
             console.log(err.message)
@@ -91,6 +91,7 @@ export const likePost = createAsyncThunk("post/likePost",
 
 const initialState = {
     posts: [],
+    totalPages: 0,
     isLoading: false
 }
 
@@ -99,7 +100,9 @@ const postSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder.addCase(getPosts.fulfilled, (state, {payload}) => {
-            state.posts = payload
+            console.log(payload)
+            state.posts = payload.data
+            state.totalPages = payload.totalPages
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
             state.posts = [...state.posts, payload]

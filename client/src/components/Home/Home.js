@@ -5,13 +5,15 @@ import { getPosts } from "../../features/posts/postSlice"
 import Posts from "../Posts/Posts"
 import Form from "../Forms/Form"
 import styles from "./styles.module.css"
+import { useSearchParams } from "react-router-dom"
 
 const Home = ({user}) => {
     const dispatch = useDispatch()
     const [currentPostId, setCurrentPostId] = useState(null)
+    const [query, setQuery] = useSearchParams()
 
     useEffect(() => {
-        dispatch(getPosts())
+        dispatch(getPosts(query.get("page")))
     }, [])
 
     return(
