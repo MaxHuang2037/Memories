@@ -92,6 +92,7 @@ export const likePost = createAsyncThunk("post/likePost",
 const initialState = {
     posts: [],
     totalPages: 0,
+    currentPage: 1,
     isLoading: false
 }
 
@@ -100,12 +101,13 @@ const postSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder.addCase(getPosts.fulfilled, (state, {payload}) => {
-            console.log(payload)
             state.posts = payload.data
             state.totalPages = payload.totalPages
+            state.currentPage = payload.currentPage
+            window.scrollTo(0, 0)
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
-            state.posts = [...state.posts, payload]
+            if(state.posts.length < 6) state.posts = [...state.posts, payload]
         })
         .addCase(deletePost.fulfilled, (state, {payload}) => {
             state.posts = state.posts.filter((post) => (payload._id !== post._id))

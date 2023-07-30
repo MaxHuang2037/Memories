@@ -1,6 +1,7 @@
 import Post from "./Post"
 import {useSelector} from "react-redux"
 import styles from "./styles.module.css"
+
 const Posts = ({currentPostId, setCurrentPostId, user}) => {
     const {posts} = useSelector((state) => state.post)
     return(

@@ -2,13 +2,17 @@ import mongoose from "mongoose"
 import PostMessage from "../models/postSchema.js"
 
 export const getPosts = async (req, res) => {
-    const {page} = req.query
+    let {page} = req.query
     try {
         const LIMIT = 6
-        const start = (Number(page) - 1) * LIMIT
         const total = await PostMessage.countDocuments({})
+        const totalPages = Math.ceil(total / LIMIT)
+        if(page < 1 || page > totalPages){
+            page = 1
+        }
+        let start = (Number(page) - 1) * LIMIT
         const postMessages = await PostMessage.find().sort({_id: -1}).limit(LIMIT).skip(start)
-        res.status(200).json({data: postMessages, totalPages: Math.ceil(total / LIMIT)})
+        res.status(200).json({currentPage: Number(page) || 1, data: postMessages, totalPages: totalPages})
     } catch(err) {
         res.status(404).json({message: err.message})
     }
