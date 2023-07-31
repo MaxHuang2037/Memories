@@ -5,3 +5,10 @@
     margin-top: 1rem;
     justify-content: center;
 }
+
+.forms{
+    height: 700px;
+    position: sticky;
+    bottom: 20px;
+    margin-bottom: 40px;
+}

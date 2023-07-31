@@ -1,6 +1,24 @@
 import mongoose from "mongoose"
 import PostMessage from "../models/postSchema.js"
 
+export const getPostsBySearch = async (req, res) => {
+    let {searchQuery, tags, page} = req.query
+    try {
+        const title = new RegExp(searchQuery, "i") // ignore case
+        const LIMIT = 6
+        const total = await PostMessage.countDocuments({ $or: [ {title: title}, {tags: {$in: tags.split(",")}}]})
+        const totalPages = Math.ceil(total / LIMIT)
+        if(page < 1 || page > totalPages){
+            page = 1
+        }
+        let start = (Number(page) - 1) * LIMIT
+        const postMessages = await PostMessage.find({ $or: [ {title}, {tags: {$in: tags.split(",")}}]}).sort({_id: -1}).limit(LIMIT).skip(start)
+        res.status(200).json({currentPage: Number(page) || 1, data: postMessages, totalPages: totalPages})
+    } catch(err) {
+        res.status(404).json({message: err.message})
+    }
+}
+
 export const getPosts = async (req, res) => {
     let {page} = req.query
     try {

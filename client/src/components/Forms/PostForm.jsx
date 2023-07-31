@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { createPost, updatePost } from "../../features/posts/postSlice"
 import styles from "./styles.module.css"
 
-const Form = ({currentPostId, setCurrentPostId, user}) => {
+const PostForm = ({currentPostId, setCurrentPostId, user}) => {
     const dispatch = useDispatch()
     const {posts} = useSelector((state) => state.post)
     const [postData, setPostData] = useState({
@@ -14,7 +14,7 @@ const Form = ({currentPostId, setCurrentPostId, user}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (currentPostId){
-            dispatch(updatePost({id: currentPostId, post: {...postData, creator: user.result.name}}))
+            dispatch(updatePost({id: currentPostId, post: {...postData, tags: postData.tags.map((tag) => `${tag.trim().toLowerCase()}`), creator: user.result.name}}))
             setCurrentPostId(null)
         }
         else {
@@ -35,9 +35,8 @@ const Form = ({currentPostId, setCurrentPostId, user}) => {
     useEffect(() => {
         if (currentPostId){
             const currentPost = posts.find((post) => post._id === currentPostId)
-            const tags = currentPost.tags.map((tag) => `${tag.trim()}`)
             setPostData({
-                title: currentPost.title, message: currentPost.message, tags: tags, selectedFile: currentPost.selectedFile
+                title: currentPost.title, message: currentPost.message, tags: currentPost.tags, selectedFile: currentPost.selectedFile
             })
         }
         else{
@@ -75,4 +74,4 @@ const Form = ({currentPostId, setCurrentPostId, user}) => {
     )
 }
 
-export default Form
+export default PostForm

@@ -3,6 +3,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const token = JSON.parse(localStorage.getItem("profile"))?.token
 
+export const getPostsBySearch = createAsyncThunk("post/getPostsBySearch", 
+    async ({page, searchQuery, tags}) => {
+        try {
+            const res = await fetch(`/posts/search?page=${page}&searchQuery=${searchQuery}&tags=${tags}`)
+            return await res.json()
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+)
+
 export const getPosts = createAsyncThunk("post/getPosts", 
     async (page) => {
         try {
@@ -101,6 +112,12 @@ const postSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder.addCase(getPosts.fulfilled, (state, {payload}) => {
+            state.posts = payload.data
+            state.totalPages = payload.totalPages
+            state.currentPage = payload.currentPage
+            window.scrollTo(0, 0)
+        })
+        .addCase(getPostsBySearch.fulfilled, (state, {payload}) => {
             state.posts = payload.data
             state.totalPages = payload.totalPages
             state.currentPage = payload.currentPage
