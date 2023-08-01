@@ -20,8 +20,8 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
             <div className={styles.upper}>
                 <img className={styles.image} src={data.selectedFile} alt="memorypic"></img>
                 <div className={styles.row}>
-                    <h2>{data.creator}</h2>
-                    {isSameUser && <button onClick={handleEdit}>...</button>}
+                    <h2 className={styles.header}>{data.creator}</h2>
+                    {isSameUser && <button className={styles.edit_btn} onClick={handleEdit}>...</button>}
                 </div>
                 <h3>{moment(data.createdAt).fromNow()}</h3>
             </div>
