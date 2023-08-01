@@ -25,7 +25,7 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
                 </div>
                 <h3>{moment(data.createdAt).fromNow()}</h3>
             </div>
-            <div className={styles.lower}>
+            <div>
                 <p>{tags}</p>
                 <h2>{data.title}</h2>
                 <h3>{data.message}</h3>
