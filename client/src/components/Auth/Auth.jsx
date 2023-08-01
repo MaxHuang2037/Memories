@@ -27,8 +27,7 @@ const Auth = () => {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    const switchMode = (e) => {
-        e.preventDefault()
+    const switchMode = () => {
         setSignUp((prev) => !prev)
         setShowPassword(false)
     }
@@ -60,7 +59,7 @@ const Auth = () => {
                     {isSignup ? "Sign Up" : "Sign In"}
                 </button>
                 <GoogleLogin onSuccess={googleSuccess} onError={googleError}/>
-                <button onClick={switchMode}>
+                <button onClick={switchMode} type="button">
                     {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
                 </button>
             </form>

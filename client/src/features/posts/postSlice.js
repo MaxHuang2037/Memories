@@ -124,7 +124,10 @@ const postSlice = createSlice({
             window.scrollTo(0, 0)
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
-            if(state.posts.length < 6) state.posts = [...state.posts, payload]
+            state.posts = payload.data
+            state.totalPages = payload.totalPages
+            state.currentPage = payload.currentPage
+            window.scrollTo(0, 0)
         })
         .addCase(deletePost.fulfilled, (state, {payload}) => {
             state.posts = state.posts.filter((post) => (payload._id !== post._id))

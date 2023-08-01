@@ -1,8 +1,7 @@
 import styles from "./styles.module.css"
 
 const Input = ({name, type, setShowPassword, placeholder, handleChange}) => {
-    const handlePassword = (e) => {
-        e.preventDefault()
+    const handlePassword = () => {
         setShowPassword((prev) => !prev)
     }
 
@@ -16,7 +15,7 @@ const Input = ({name, type, setShowPassword, placeholder, handleChange}) => {
                 onChange={handleChange}
                 type={type}
             ></input>
-            {name === "password" && <button onClick={handlePassword}>Show Password</button> }
+            {name === "password" && <button onClick={handlePassword} type="button">Show Password</button> }
         </>
     )
 }

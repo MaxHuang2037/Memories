@@ -8,27 +8,28 @@ const PostForm = ({currentPostId, setCurrentPostId, user}) => {
     const dispatch = useDispatch()
     const {posts} = useSelector((state) => state.post)
     const [postData, setPostData] = useState({
-        title: "", message: "", tags: "", selectedFile: ""
+        title: "", message: "", tags: [], selectedFile: ""
     })
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (currentPostId){
-            dispatch(updatePost({id: currentPostId, post: {...postData, tags: postData.tags.map((tag) => `${tag.trim().toLowerCase()}`), creator: user.result.name}}))
+            const tags = postData.tags.map((tag) => `${tag.trim().toLowerCase()}`)
+            dispatch(updatePost({id: currentPostId, post: {...postData, tags: tags, creator: user.result.name}}))
             setCurrentPostId(null)
         }
         else {
             dispatch(createPost({...postData, creator: user.result.name}))
         }
         setPostData({
-            title: "", message: "", tags: "", selectedFile: ""
+            title: "", message: "", tags: [], selectedFile: ""
         })
     }
 
     const clear = (e) => {
         e.preventDefault()
         setPostData({
-            title: "", message: "", tags: "", selectedFile: ""
+            title: "", message: "", tags: [], selectedFile: ""
         })
     }
 
@@ -41,7 +42,7 @@ const PostForm = ({currentPostId, setCurrentPostId, user}) => {
         }
         else{
             setPostData({
-                title: "", message: "", tags: "", selectedFile: ""
+                title: "", message: "", tags: [], selectedFile: ""
             })
         }
     }, [currentPostId])
@@ -55,7 +56,7 @@ const PostForm = ({currentPostId, setCurrentPostId, user}) => {
                 onChange={(e) => setPostData({...postData, title: e.target.value})}></input>
                 <input required className={styles.input} placeholder="Message" value={postData.message}
                 onChange={(e) => setPostData({...postData, message: e.target.value})}></input>
-                <input required className={styles.input} placeholder="Tags (comma seperated)" value={postData.tags}
+                <input className={styles.input} placeholder="Tags (comma seperated)" value={postData.tags}
                 onChange={(e) => setPostData({...postData, tags: e.target.value.split(",")})}></input>
                 <div>
                     <FileBase
