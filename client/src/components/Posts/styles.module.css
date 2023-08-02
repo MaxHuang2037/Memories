@@ -1,4 +1,6 @@
 .memory{
+    display: flex;
+    flex-direction: column;
     padding: 1rem 1rem 0 1rem;
     background-color: rgb(52, 51, 71);
     border-radius: 1rem;
@@ -10,15 +12,25 @@
     justify-content: space-between;
 }
 
+.row:last-child{
+    padding-bottom: 1rem;
+}
+
 .image{
-    width: 100%;
-    max-height: 60%;
+    max-height: 70%;
     border-radius: 0.5rem;
 }
 
 .upper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-bottom: solid;
     height: 280px;
+}
+
+.lower{
+    flex-grow: 1;
 }
 
 .container{
@@ -32,4 +44,15 @@
 
 .header{
     margin: 10px 0 0 0;
+}
+
+.likes{
+    height: 24px;
+    margin-right: 10px;
+}
+
+.like_btn{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
 }

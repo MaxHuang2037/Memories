@@ -25,6 +25,17 @@ export const getPosts = createAsyncThunk("post/getPosts",
     }
 )
 
+export const getPost = createAsyncThunk("post/getPost", 
+    async (id) => {
+        try {
+            const res = await fetch(`/posts/${id}`)
+            return await res.json()
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+)
+
 export const createPost = createAsyncThunk("post/createPost", 
     async (data) => {
         try {
@@ -104,7 +115,8 @@ const initialState = {
     posts: [],
     totalPages: 0,
     currentPage: 1,
-    isLoading: false
+    isLoading: false,
+    singlePost: {}
 }
 
 const postSlice = createSlice({
@@ -122,6 +134,9 @@ const postSlice = createSlice({
             state.totalPages = payload.totalPages
             state.currentPage = payload.currentPage
             window.scrollTo(0, 0)
+        })
+        builder.addCase(getPost.fulfilled, (state, {payload}) => {
+            state.singlePost = payload
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
             if(state.posts.length < 6){

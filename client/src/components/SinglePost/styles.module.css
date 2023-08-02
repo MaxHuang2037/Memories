@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    border-style: solid;
+    width: 80vw;
+}
+
+.post_img{
+    width: 50%;
+}

@@ -11,7 +11,7 @@ const SearchForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const tags = search.tags.split(",").map((tag) => `${tag.trim()}`).join(",")
-        navigate(`/search?searchQuery=${search.searchQuery || "none"}&tags=${tags || "none"}`)
+        navigate(`/posts/search?searchQuery=${search.searchQuery || "none"}&tags=${tags || "none"}`)
     }
 
     return (

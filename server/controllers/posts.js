@@ -36,6 +36,16 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPost = async (req, res) => {
+    let {id} = req.params
+    try {
+        const post = await PostMessage.findById(String(id))
+        res.status(200).json({data: post})
+    } catch(err) {
+        res.status(404).json({message: err.message})
+    }
+}
+
 export const createPost = async (req, res) => {
     const body = req.body
     const UID = req.userId
