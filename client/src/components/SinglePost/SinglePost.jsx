@@ -24,10 +24,10 @@ const SinglePost = () => {
                     <h1>{moment(singlePost?.data?.createdAt).fromNow()}</h1>
                 </div>
                 <div>
-                    Chat feature comming soon!
+                    Chat feature coming soon!
                 </div>
                 <div>
-                    Comments feature comming soon!
+                    Comments feature coming soon!
                 </div>
             </section>
             <img className={styles.post_img} src={singlePost?.data?.selectedFile}></img>
