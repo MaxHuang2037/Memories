@@ -43,7 +43,7 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
             <div className={styles.row}>
                 <button className={styles.like_btn} disabled={!user?.result} onClick={() => dispatch(likePost(data._id))}>
                     {
-                        data.likeCount.includes(String(user?.result?.sub)) || data.likeCount.includes(String(user?._id)) ? 
+                        data.likeCount.includes(String(user?.result?.sub)) || data.likeCount.includes(String(user?.result?._id)) ? 
                         <img className={styles.likes} src={liked} alt="liked"></img> : 
                         <img className={styles.likes} src={notliked} alt="notliked"></img>
                     }
