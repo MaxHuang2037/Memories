@@ -49,9 +49,9 @@ const PostForm = ({currentPostId, setCurrentPostId, user}) => {
 
     return(
         <form className={styles.postForm} onSubmit={handleSubmit} autoComplete="off">
-            {user === null ? <h2>Please sign in to create a post</h2> : 
+            {user === null ? <h2>Sign in to create a post</h2> : 
             <>
-                <h2>{currentPostId ? "Editing" : "Creating"} a post</h2>
+                <h2 style={{fontSize: "30px"}}>{currentPostId ? "Editing" : "Creating"} a post</h2>
                 <input required className={styles.input} placeholder="Title" value={postData.title}
                 onChange={(e) => setPostData({...postData, title: e.target.value})}></input>
                 <input required className={styles.input} placeholder="Message" value={postData.message}

@@ -12,7 +12,7 @@ export const getPostsBySearch = async (req, res) => {
             page = 1
         }
         let start = (Number(page) - 1) * LIMIT
-        const postMessages = await PostMessage.find({ $or: [ {title}, {tags: {$all: tags.split(",")}}]}).sort({_id: -1}).limit(LIMIT).skip(start)
+        const postMessages = await PostMessage.find({ $or: [ {title}, {tags: {$in: tags.split(",")}}]}).sort({_id: -1}).limit(LIMIT).skip(start)
         res.status(200).json({currentPage: Number(page) || 1, data: postMessages, totalPages: totalPages})
     } catch(err) {
         res.status(404).json({message: err.message})

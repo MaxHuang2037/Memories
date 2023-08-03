@@ -16,7 +16,7 @@ const SearchForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.searchForm}>
-            <h2>Search</h2>
+            <h2 style={{fontSize: "30px"}}>Search</h2>
             <input className={styles.input} placeholder="Title" onChange={(e) => setSearch({...search, searchQuery: e.target.value})}></input>
             <input className={styles.input} placeholder="Tags (comma seperated)" onChange={(e) => setSearch({...search, tags: e.target.value})}></input>
             <button className={styles.search_btn} type="submit">Search</button>

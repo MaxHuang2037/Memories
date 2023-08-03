@@ -1,11 +1,41 @@
 .container{
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-content: center;
-    border-style: solid;
+    background-color: rgb(52, 51, 71);
     width: 80vw;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.container:last-child{
+    flex-direction: column;
+}
+
+.recommendedPosts{
+    display: flex;
+}
+
+.post{
+    width: 15%;
+    border-style: solid;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
 }
 
 .post_img{
     width: 50%;
+    border-radius: 1rem;
+}
+
+.title{
+    font-size: 50px; 
+    margin: 0;
+}
+
+.tags{
+    color: rgb(184, 184, 184);
 }
