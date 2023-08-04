@@ -1,14 +1,20 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getPost, getPostsBySearch } from "../../features/posts/postSlice"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
 import styles from "./styles.module.css"
 
 const SinglePost = () => {
-    const {singlePost, posts} = useSelector((state) => state.post)
-    const dispatch = useDispatch()
+    const {singlePost, posts, isLoading, isLoadingSinglePost} = useSelector((state) => state.post)
     const {id} = useParams()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const openPost = (id) => {
+        navigate(`/posts/${id}`)
+    }
+
     useEffect(() => {
         dispatch(getPost(id))
     }, [id])
@@ -18,6 +24,10 @@ const SinglePost = () => {
             dispatch(getPostsBySearch({searchQuery: "none", tags: singlePost?.data?.tags.join(",")}))
         }
     }, [singlePost])
+
+    if(isLoading || isLoadingSinglePost){
+        return <h2>Loading...</h2>
+    }
 
     const recommendedPosts = posts.filter(({_id}) => _id !== singlePost?.data?._id)
     return(
@@ -43,7 +53,7 @@ const SinglePost = () => {
                     {
                         recommendedPosts.length > 0 && (
                             recommendedPosts.map(({title, message, likeCount, creator, _id}) => (
-                                <section className={styles.post} key={_id}>
+                                <section onClick={() => openPost(_id)} className={styles.post} key={_id}>
                                     <h1>{title}</h1>
                                     <p>{creator}</p>
                                     <p>{message}</p>

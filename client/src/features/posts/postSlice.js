@@ -116,6 +116,7 @@ const initialState = {
     totalPages: 0,
     currentPage: 1,
     isLoading: false,
+    isLoadingSinglePost: false,
     singlePost: {}
 }
 
@@ -127,16 +128,19 @@ const postSlice = createSlice({
             state.posts = payload.data
             state.totalPages = payload.totalPages
             state.currentPage = payload.currentPage
+            state.isLoading = false
             window.scrollTo(0, 0)
         })
         .addCase(getPostsBySearch.fulfilled, (state, {payload}) => {
             state.posts = payload.data
             state.totalPages = payload.totalPages
             state.currentPage = payload.currentPage
+            state.isLoading = false
             window.scrollTo(0, 0)
         })
-        builder.addCase(getPost.fulfilled, (state, {payload}) => {
+        .addCase(getPost.fulfilled, (state, {payload}) => {
             state.singlePost = payload
+            state.isLoadingSinglePost = false
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
             if(state.posts.length < 6){
@@ -154,6 +158,15 @@ const postSlice = createSlice({
         })
         .addCase(likePost.fulfilled, (state, {payload}) => {
             state.posts = state.posts.map((post) => post._id === payload._id ? payload : post)
+        })
+        .addCase(getPost.pending, (state, {payload}) => {
+            state.isLoadingSinglePost = true
+        })
+        .addCase(getPosts.pending, (state, {payload}) => {
+            state.isLoading = true
+        })
+        .addCase(getPostsBySearch.pending, (state, {payload}) => {
+            state.isLoading = true
         })
     }
 })
