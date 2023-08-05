@@ -112,6 +112,26 @@ export const likePost = createAsyncThunk("post/likePost",
     }
 )
 
+export const commentPost = createAsyncThunk("post/commentPost", 
+    async ({id, comments}) => {
+        console.log(token)
+        try {
+            const res = await fetch(`/posts/${id}/commentPost`, {
+                method: "PATCH",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({comments})
+            })
+            return await res.json()
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+)
+
 const initialState = {
     posts: [],
     totalPages: 0,
@@ -141,14 +161,12 @@ const postSlice = createSlice({
         })
         .addCase(getPost.fulfilled, (state, {payload}) => {
             state.singlePost = payload
+            console.log(state.singlePost)
             state.isLoadingSinglePost = false
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
-            if(state.posts.length < 6){
-                state.posts = [...state.posts, payload]
-            } else {
-                window.location.reload(false)
-            }
+            state.posts = [...state.posts, payload]
+            window.location.reload(false)
                 
         })
         .addCase(deletePost.fulfilled, (state, {payload}) => {
@@ -160,8 +178,8 @@ const postSlice = createSlice({
         .addCase(likePost.fulfilled, (state, {payload}) => {
             state.posts = state.posts.map((post) => post._id === payload._id ? payload : post)
         })
-        .addCase(getPost.pending, (state) => {
-            state.isLoadingSinglePost = true
+        .addCase(commentPost.fulfilled, (state, {payload}) => {
+            state.singlePost = payload
         })
         .addCase(getPosts.pending, (state) => {
             state.isLoading = true

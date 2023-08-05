@@ -8,6 +8,7 @@ const Navbar = ({user, setUser}) => {
     const logOut = () => {
         localStorage.clear()
         setUser(null)
+        window.location.reload(false)
     }
 
     useEffect(() => {

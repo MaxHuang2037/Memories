@@ -23,7 +23,7 @@ const App = () => {
                     <Route path="/" element={<Home user={user}/>}/>
                     <Route path="/auth" element={<Auth/>}/>
                     <Route path="/posts/search" element={<Home user={user} search={true}/>}/>
-                    <Route path="/posts/:id" element={<SinglePost></SinglePost>}/>
+                    <Route path="/posts/:id" element={<SinglePost user={user}></SinglePost>}/>
                 </Routes>
             </main>
         </GoogleOAuthProvider>

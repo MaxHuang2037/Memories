@@ -10,6 +10,7 @@ const postSchema = mongoose.Schema({
         type: [String],
         default: []
     },
+    comments: [[String, String]],
     UID: String
 }, { timestamps: true })
 

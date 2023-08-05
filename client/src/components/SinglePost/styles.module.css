@@ -1,7 +1,6 @@
 .container{
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
     align-content: center;
     background-color: rgb(52, 51, 71);
     width: 80vw;
@@ -27,9 +26,18 @@
     padding: 1rem;
 }
 
+.left{
+    border-style: solid;
+    width: 50%;
+}
+
 .post_img{
     width: 50%;
+}
+
+.img{
     border-radius: 1rem;
+    width: 100%;
 }
 
 .title{
@@ -39,4 +47,8 @@
 
 .tags{
     color: rgb(184, 184, 184);
+}
+
+.commentSection{
+
 }

@@ -39,8 +39,8 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
     let {id} = req.params
     try {
-        const post = await PostMessage.findById(String(id))
-        res.status(200).json({data: post})
+        const post = await PostMessage.findById(id)
+        res.status(200).json(post)
     } catch(err) {
         res.status(404).json({message: err.message})
     }
@@ -106,6 +106,23 @@ export const likePost = async (req, res) => {
         }
         
         const updatedPost = await PostMessage.findByIdAndUpdate(id, {likeCount: likeCount}, {new: true})
+
+        res.json(updatedPost)
+    } catch (err) {
+        res.status(404).json({message: err.message})
+    }
+}
+
+export const commentPost = async (req, res) => {
+    const {id} = req.params;
+    let {comments} = req.body;
+    
+    if(req.userId === undefined) return res.json({message: "Unauthenticated"})
+    
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with this id")
+        
+        const updatedPost = await PostMessage.findByIdAndUpdate(id, {comments: comments}, {new: true})
 
         res.json(updatedPost)
     } catch (err) {

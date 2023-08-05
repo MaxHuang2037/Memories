@@ -4,8 +4,9 @@ import { getPost, getPostsBySearch } from "../../features/posts/postSlice"
 import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
 import styles from "./styles.module.css"
+import CommentSection from "./CommentSection"
 
-const SinglePost = () => {
+const SinglePost = ({user}) => {
     const {singlePost, posts, isLoading, isLoadingSinglePost} = useSelector((state) => state.post)
     const {id} = useParams()
     const dispatch = useDispatch()
@@ -21,11 +22,11 @@ const SinglePost = () => {
 
     useEffect(() => {
         if(singlePost){
-            dispatch(getPostsBySearch({searchQuery: "none", tags: singlePost?.data?.tags.join(",")}))
+            dispatch(getPostsBySearch({searchQuery: "none", tags: singlePost?.tags?.join(",")}))
         }
-    }, [singlePost])
+    }, [singlePost._id])
     
-    const recommendedPosts = posts.filter(({_id}) => _id !== singlePost?.data?._id)
+    const recommendedPosts = posts.filter(({_id}) => _id !== singlePost?._id)
     
     if(isLoading || isLoadingSinglePost){
         return <h2>Loading...</h2>
@@ -34,33 +35,33 @@ const SinglePost = () => {
     return(
         <>
             <article className={styles.container}>
-                <section>
+                <section className={styles.left}>
                     <div>
-                        <h2 className={styles.title}>{singlePost?.data?.title}</h2>
-                        <p className={styles.tags}>{singlePost?.data?.tags.map((tag) => `#${tag.trim()} `)}</p>
-                        <p>{singlePost?.data?.message}</p>
-                        <p>Created by: {singlePost?.data?.creator}</p>
-                        <h1>{moment(singlePost?.data?.createdAt).fromNow()}</h1>
+                        <h2 className={styles.title}>{singlePost?.title}</h2>
+                        <p className={styles.tags}>{singlePost?.tags?.map((tag) => `#${tag.trim()} `)}</p>
+                        <p>{singlePost?.message}</p>
+                        <p>Created by: {singlePost?.creator}</p>
+                        <h1>{moment(singlePost?.createdAt).fromNow()}</h1>
                     </div>
-                    <div>
-                        Comments feature coming soon!
-                    </div>
+                    <CommentSection user={user} id={singlePost?._id} comments={singlePost?.comments}/>
                 </section>
-                <img className={styles.post_img} src={singlePost?.data?.selectedFile} alt="Post"></img>
+                <figure className={styles.post_img}>
+                    <img className={styles.img} src={singlePost?.selectedFile} alt="Post"></img>
+                </figure>
             </article>
             <article className={styles.container}>
                 <h2>You might also like:</h2>
                 <div className={styles.recommendedPosts}>
                     {
-                        recommendedPosts.length > 0 && (
-                            recommendedPosts.map(({title, message, likeCount, creator, _id}) => (
-                                <section onClick={() => openPost(_id)} className={styles.post} key={_id}>
+                        recommendedPosts !== undefined && (
+                            recommendedPosts.map(({title, message, likeCount, creator, _id}) => {
+                                return <section onClick={() => openPost(_id)} className={styles.post} key={_id}>
                                     <h1>{title}</h1>
                                     <p>{creator}</p>
                                     <p>{message}</p>
                                     <p>Likes: {likeCount.length}</p>
                                 </section>
-                            ))
+                            })
                         )
                     }
                 </div>
