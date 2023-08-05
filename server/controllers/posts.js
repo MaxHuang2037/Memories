@@ -91,25 +91,24 @@ export const updatePost = async (req, res) => {
 
 export const likePost = async (req, res) => {
     const {id} = req.params;
-
+    let {likeCount} = req.body;
+    
     if(req.userId === undefined) return res.json({message: "Unauthenticated"})
-
+    
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with this id")
         
-        const post = await PostMessage.findById(id)
-
-        const index = post.likeCount.findIndex((id) => id === String(req.userId))
+        const index = likeCount.findIndex((id) => id === String(req.userId))
         if (index === -1){
-            post.likeCount.push(req.userId)
+            likeCount.push(req.userId)
         } else {
-            post.likeCount = post.likeCount.filter((id) => (id !== String(req.userId)))
+            likeCount = likeCount.filter((id) => (id !== String(req.userId)))
         }
         
-        const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true})
+        const updatedPost = await PostMessage.findByIdAndUpdate(id, {likeCount: likeCount}, {new: true})
 
         res.json(updatedPost)
-    } catch (error) {
+    } catch (err) {
         res.status(404).json({message: err.message})
     }
 }

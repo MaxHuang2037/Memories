@@ -24,12 +24,13 @@ const SinglePost = () => {
             dispatch(getPostsBySearch({searchQuery: "none", tags: singlePost?.data?.tags.join(",")}))
         }
     }, [singlePost])
-
+    
+    const recommendedPosts = posts.filter(({_id}) => _id !== singlePost?.data?._id)
+    
     if(isLoading || isLoadingSinglePost){
         return <h2>Loading...</h2>
     }
 
-    const recommendedPosts = posts.filter(({_id}) => _id !== singlePost?.data?._id)
     return(
         <>
             <article className={styles.container}>
