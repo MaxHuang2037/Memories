@@ -19,15 +19,20 @@ const CommentSection = ({comments, id, user}) => {
 
     return(
         <form onSubmit={handleSubmit}>
-            <h2>Comments</h2>
+            <h2 style={{marginBottom: "5px"}}>Comments</h2>
             <section className={styles.commentSection}>
                 {
                     comments.map((comment, index) => {
-                        return <h1 key={index}>{comment[0]}: {comment[1]}</h1>
+                        return <p key={index}>{comment[0]}: {comment[1]}</p>
                     })
                 }
             </section>
-            <input value={comment[1]} onChange={(e) => setComment([user?.result?.name, e.target.value])}></input>
+            <div style={{display: "flex"}}>
+                <input required placeholder="Add a comment" className={styles.input} value={comment[1]} onChange={(e) => setComment([user?.result?.name, e.target.value])}></input>
+                <button className={styles.comment_btn} type="submit">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
         </form>
     )
 }

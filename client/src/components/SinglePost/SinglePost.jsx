@@ -36,12 +36,12 @@ const SinglePost = ({user}) => {
         <>
             <article className={styles.container}>
                 <section className={styles.left}>
-                    <div>
+                    <div style={{borderBottom: "Solid"}}>
                         <h2 className={styles.title}>{singlePost?.title}</h2>
                         <p className={styles.tags}>{singlePost?.tags?.map((tag) => `#${tag.trim()} `)}</p>
                         <p>{singlePost?.message}</p>
-                        <p>Created by: {singlePost?.creator}</p>
-                        <h1>{moment(singlePost?.createdAt).fromNow()}</h1>
+                        <h1>Created by: {singlePost?.creator}</h1>
+                        <p>{moment(singlePost?.createdAt).fromNow()}</p>
                     </div>
                     <CommentSection user={user} id={singlePost?._id} comments={singlePost?.comments}/>
                 </section>
@@ -53,7 +53,7 @@ const SinglePost = ({user}) => {
                 <h2>You might also like:</h2>
                 <div className={styles.recommendedPosts}>
                     {
-                        recommendedPosts !== undefined && (
+                        recommendedPosts.length > 0 ? (
                             recommendedPosts.map(({title, message, likeCount, creator, _id}) => {
                                 return <section onClick={() => openPost(_id)} className={styles.post} key={_id}>
                                     <h1>{title}</h1>
@@ -62,7 +62,7 @@ const SinglePost = ({user}) => {
                                     <p>Likes: {likeCount.length}</p>
                                 </section>
                             })
-                        )
+                        ) : <p>No similar posts</p>
                     }
                 </div>
             </article>

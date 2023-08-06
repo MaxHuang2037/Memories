@@ -19,3 +19,7 @@ button{
 button:hover{
     cursor: pointer;
 }
+
+input:focus { 
+    outline: none; 
+}

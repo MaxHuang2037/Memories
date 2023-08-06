@@ -30,7 +30,9 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
                 <div>
                     <div className={styles.row}>
                         <h2 className={styles.header}>{data.creator}</h2>
-                        {isSameUser && <button className={styles.edit_btn} onClick={handleEdit}>...</button>}
+                        {isSameUser && <button className={styles.edit_btn} onClick={handleEdit}>
+                            <span class="material-symbols-outlined">more_horiz</span>    
+                        </button>}
                     </div>
                     <h3>{moment(data.createdAt).fromNow()}</h3>
                 </div>
@@ -49,7 +51,9 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
                     }
                     Likes: {data.likeCount.length}
                 </button>
-                {isSameUser && <button onClick={() => dispatch(deletePost(data._id))}>Delete</button>}
+                {isSameUser && <button onClick={() => dispatch(deletePost(data._id))}>
+                    <span class="material-symbols-outlined">delete</span>
+                </button>}
             </div>
         </div>
     )
