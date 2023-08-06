@@ -22,7 +22,7 @@ const CommentSection = ({comments, id, user}) => {
             <h2 style={{marginBottom: "5px"}}>Comments</h2>
             <section className={styles.commentSection}>
                 {
-                    comments.map((comment, index) => {
+                    comments?.toReversed().map((comment, index) => {
                         return <p key={index}>{comment[0]}: {comment[1]}</p>
                     })
                 }
