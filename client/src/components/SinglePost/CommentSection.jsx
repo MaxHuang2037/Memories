@@ -27,12 +27,15 @@ const CommentSection = ({comments, id, user}) => {
                     })
                 }
             </section>
-            <div style={{display: "flex"}}>
-                <input required placeholder="Add a comment" className={styles.input} value={comment[1]} onChange={(e) => setComment([user?.result?.name, e.target.value])}></input>
-                <button className={styles.comment_btn} type="submit">
-                    <span class="material-symbols-outlined">send</span>
-                </button>
-            </div>
+            {
+                user && 
+                <div style={{display: "flex"}}>
+                    <input required placeholder="Add a comment" className={styles.input} value={comment[1]} onChange={(e) => setComment([user?.result?.name, e.target.value])}></input>
+                    <button className={styles.comment_btn} type="submit">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            }
         </form>
     )
 }
