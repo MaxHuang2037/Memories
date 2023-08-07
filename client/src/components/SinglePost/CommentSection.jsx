@@ -9,7 +9,7 @@ const CommentSection = ({comments, id, user}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(commentPost({id: id, comments: [...comments, comment]}))
+        dispatch(commentPost({id: id, comments: [comment, ...comments]}))
         setComment([user?.name, ""])
     }
 
@@ -22,7 +22,7 @@ const CommentSection = ({comments, id, user}) => {
             <h2 style={{marginBottom: "5px"}}>Comments</h2>
             <section className={styles.commentSection}>
                 {
-                    comments?.toReversed().map((comment, index) => {
+                    comments?.map((comment, index) => {
                         return <p key={index}>{comment[0]}: {comment[1]}</p>
                     })
                 }
