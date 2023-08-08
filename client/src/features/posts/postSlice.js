@@ -161,7 +161,6 @@ const postSlice = createSlice({
         })
         .addCase(getPost.fulfilled, (state, {payload}) => {
             state.singlePost = payload
-            console.log(state.singlePost)
             state.isLoadingSinglePost = false
         })
         .addCase(createPost.fulfilled, (state, {payload}) => {
