@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+const token = JSON.parse(localStorage.getItem("profile"))?.token
+
 export const signIn = createAsyncThunk("users/signIn", 
     async ({email, password}) => {
         try {
@@ -21,7 +23,6 @@ export const signIn = createAsyncThunk("users/signIn",
 
 export const signUp = createAsyncThunk("users/signUp", 
     async (user) => {
-        console.log(user)
         try {
             const res = await fetch("/users/signUp", {
                 method: "POST",
@@ -38,11 +39,19 @@ export const signUp = createAsyncThunk("users/signUp",
     }
 )
 
-export const getUsers = createAsyncThunk("users/signIn", 
-    async () => {
+export const editProfile = createAsyncThunk("users/editProfile", 
+    async (data) => {
         try {
-            // const res = await fetch("/posts")
-            // return await res.json()
+            const res = await fetch("/users/editProfile", {
+                method: "PATCH",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(data)
+            })
+            return await res.json()
         } catch (err) {
             console.log(err.message)
         }
@@ -50,8 +59,7 @@ export const getUsers = createAsyncThunk("users/signIn",
 )
 
 const initialState = {
-    users: [],
-    isLoading: false
+
 }
 
 const userSlice = createSlice({
@@ -71,6 +79,12 @@ const userSlice = createSlice({
             }
             localStorage.setItem("profile", JSON.stringify(payload))
             window.location.href = "/"
+        })
+        .addCase(editProfile.fulfilled, (state, {payload}) => {
+            if(payload.message){
+                return window.alert(payload.message)
+            }
+            localStorage.setItem("profile", JSON.stringify({token: token, result: payload}))
         })
     }
 })

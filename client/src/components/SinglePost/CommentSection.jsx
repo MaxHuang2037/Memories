@@ -23,7 +23,7 @@ const CommentSection = ({comments, id, user}) => {
             <section className={styles.commentSection}>
                 {
                     comments?.map((comment, index) => {
-                        return <p key={index}>{comment[0]}: {comment[1]}</p>
+                        return <p key={index}><span style={{fontWeight:"bold"}}>{comment[0]}</span>: {comment[1]}</p>
                     })
                 }
             </section>

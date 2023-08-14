@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Home from "./components/Home/Home"
 import Auth from "./components/Auth/Auth"
 import SinglePost from "./components/SinglePost/SinglePost"
+import Profile from "./components/Profile/Profile"
 import { Routes, Route } from "react-router-dom"
 import {GoogleOAuthProvider} from "@react-oauth/google"
 import { useEffect, useState } from "react"
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="/auth" element={<Auth/>}/>
                     <Route path="/posts/search" element={<Home user={user} search={true}/>}/>
                     <Route path="/posts/:id" element={<SinglePost user={user}></SinglePost>}/>
+                    <Route path="/profile/:uid" element={<Profile user={user} setUser={setUser}/>}/>
                 </Routes>
             </main>
         </GoogleOAuthProvider>

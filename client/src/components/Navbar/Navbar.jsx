@@ -33,7 +33,9 @@ const Navbar = ({user, setUser}) => {
                 {user ? 
                     <div className={styles.loggedIn}>
                         <h1 className={styles.username}>{user.result.name}</h1>
-                        <img className={styles.pfp} alt={user.result.name} src={user.result.picture}></img>
+                        <Link to={`profile/${user.result._id || user.result.sub}`}>
+                            <img className={styles.pfp} alt={user.result.name} src={user.result.picture}></img>
+                        </Link>
                         <button onClick={logOut} className={styles.log_btn}>Log Out</button>
                     </div> :
                     <Link to="/auth">

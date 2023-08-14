@@ -39,3 +39,17 @@ export const signUp = async (req, res) => {
         res.status(500).json({message: "Something went wrong"})
     }
 }
+
+export const editProfile = async (req, res) => {
+    const UID = req.userId
+    const body = req.body
+
+    if(UID === undefined) return res.json({message: "Unauthenticated"})
+
+    try {
+        const post = await User.findOneAndUpdate({_id: UID}, body, {new: true})
+        res.status(200).json(post)
+    } catch(err) {
+        res.status(404).json({message: err.message})
+    }
+}
