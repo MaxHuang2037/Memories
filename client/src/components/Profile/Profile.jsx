@@ -11,9 +11,7 @@ const Profile = ({user, setUser}) => {
     })
     
     if(user === null){
-        return(
-            <h1>please sign in</h1>
-        )
+        window.location.href = "/"
     }
         
     const handleSubmit = async (e) =>{
@@ -24,15 +22,22 @@ const Profile = ({user, setUser}) => {
 
     return(
         <form onSubmit={handleSubmit} className={styles.container}>
-            <img src={userData.picture} alt="pfp"></img>
-            <FileBase
-                type="file"
-                multiple={false}
-                onDone={({base64}) => setUserData({...userData, picture: base64})}>
-            </FileBase>
-            <input value={userData.name} placeholder="Name" onChange={(e) => setUserData({...userData, name: e.target.value})}></input>
-            <input value={userData.email} placeholder="Email" onChange={(e) => setUserData({...userData, email: e.target.value})}></input>    
-            <button type="submit">Submit Changes</button>
+            <section className={styles.img_section}>
+                <img className={styles.pfp} src={userData.picture} alt="pfp"></img>
+                <FileBase
+                    type="file"
+                    multiple={false}
+                    onDone={({base64}) => setUserData({...userData, picture: base64})}>
+                </FileBase>
+            </section>
+            <section className={styles.info}>
+                <h2>Edit profile</h2>
+                <label className={styles.label}>Name</label>
+                <input className={styles.input} value={userData.name} placeholder="Name" onChange={(e) => setUserData({...userData, name: e.target.value})}></input>
+                <label className={styles.label}>Email</label>
+                <input className={styles.input} value={userData.email} placeholder="Email" onChange={(e) => setUserData({...userData, email: e.target.value})}></input>    
+                <button className={styles.submit_btn} type="submit">Save Changes</button>
+            </section>
         </form>
     )
 }
