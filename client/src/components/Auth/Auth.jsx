@@ -57,7 +57,7 @@ const Auth = () => {
                 <button className={styles.submit_btn} type="submit">
                     {isSignup ? "Sign Up" : "Sign In"}
                 </button>
-                <GoogleLogin onSuccess={googleSuccess} onError={googleError}/>
+                {!isSignup && <GoogleLogin onSuccess={googleSuccess} onError={googleError}/>}
                 <button onClick={switchMode} type="button">
                     {isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
                 </button>
