@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const token = JSON.parse(localStorage.getItem("profile"))?.token
 
 export const signIn = createAsyncThunk("users/signIn", 
-    async ({email, password}) => {
+    async (data) => {
         try {
             const res = await fetch("/users/signIn", {
                 method: "POST",
@@ -12,7 +12,7 @@ export const signIn = createAsyncThunk("users/signIn",
                     "Accept": "application/json",
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({email, password})
+                body: JSON.stringify(data)
             })
             return await res.json()
         } catch (err) {

@@ -35,7 +35,7 @@ const Profile = ({user, setUser}) => {
                 <label className={styles.label}>Name</label>
                 <input className={styles.input} value={userData.name} placeholder="Name" onChange={(e) => setUserData({...userData, name: e.target.value})}></input>
                 <label className={styles.label}>Email</label>
-                <input className={styles.input} value={userData.email} placeholder="Email" onChange={(e) => setUserData({...userData, email: e.target.value})}></input>    
+                <input disabled={user?.result?.password === undefined} className={styles.input} value={userData.email} placeholder="Email" onChange={(e) => setUserData({...userData, email: e.target.value})}></input>    
                 <button className={styles.submit_btn} type="submit">Save Changes</button>
             </section>
         </form>

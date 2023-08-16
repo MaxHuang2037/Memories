@@ -34,8 +34,7 @@ const Auth = () => {
 
     const googleSuccess = async (res) => {
         const data = jwt_decode(res.credential)
-        localStorage.setItem("profile", JSON.stringify({result: data, token: res.credential}))
-        window.location.href = "/"
+        dispatch(signIn({name: data.name, email: data.email, picture: data.picture}))
     }
 
     const googleError = (err) => {

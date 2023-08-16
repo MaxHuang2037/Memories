@@ -38,7 +38,7 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
                 </div>
             </div>
             <div className={styles.lower}>
-                <p>{tags}</p>
+                <p className={styles.tags}>{tags}</p>
                 <h2 className={styles.text}>{data.title}</h2>
                 <h3 className={styles.text}>{data.message}</h3>
             </div>
