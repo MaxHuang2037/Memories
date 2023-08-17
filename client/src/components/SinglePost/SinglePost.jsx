@@ -54,12 +54,13 @@ const SinglePost = ({user}) => {
                 <div className={styles.recommendedPosts}>
                     {
                         recommendedPosts.length > 0 ? (
-                            recommendedPosts.map(({title, message, likeCount, creator, _id}) => {
+                            recommendedPosts.map(({title, message, likeCount, creator, _id, selectedFile}) => {
                                 return <section onClick={() => openPost(_id)} className={styles.post} key={_id}>
-                                    <h1>{title}</h1>
+                                    <h2 className={styles.text}>{title}</h2>
                                     <p>{creator}</p>
-                                    <p>{message}</p>
+                                    <p className={styles.text}>{message}</p>
                                     <p>Likes: {likeCount.length}</p>
+                                    <img className={styles.rec_post_img} src={selectedFile}></img>
                                 </section>
                             })
                         ) : <p>No similar posts</p>

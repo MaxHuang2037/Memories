@@ -40,7 +40,7 @@ const Post = ({data, currentPostId, setCurrentPostId, user}) => {
             <div className={styles.lower}>
                 <p className={styles.tags}>{tags}</p>
                 <h2 className={styles.text}>{data.title}</h2>
-                <h3 className={styles.text}>{data.message}</h3>
+                <p className={styles.text}>{data.message}</p>
             </div>
             <div className={styles.row}>
                 <button className={styles.like_btn} disabled={!user?.result} onClick={() => dispatch(likePost({id: data._id, likeCount: data.likeCount}))}>
