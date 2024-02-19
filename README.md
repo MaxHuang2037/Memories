@@ -11,4 +11,4 @@ This project was made with Node JS. Follow these steps to set up the project.
 If you get an error message, you may need to manually add "npm" to your system path.
 
 ## DOTENV
-Server folder does not include the dotenv file that contains the mongo_URI, please contact creator for the username and password
+Server folder does not include the dotenv file that contains the mongo_URI, please contact developer for the username and password
