@@ -24,7 +24,7 @@ const Navbar = ({user, setUser}) => {
         <header className={styles.navbar}>
             <div className={styles.brand}>
                 <Link to="/">
-                    <button className={styles.home}>Posts</button>
+                    <button className={styles.home}>Memories</button>
                 </Link>
                 <img className={styles.navbar_img} src={memories} alt="memories"></img>
             </div>
