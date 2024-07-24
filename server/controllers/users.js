@@ -12,7 +12,7 @@ export const signIn = async (req, res) => {
 
         if(picture && !existingUser){
             existingUser = await User.create({email, name: name, picture})
-        } else if(!picture && !existingUser) {
+        } else{
             const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
     
             if(!isPasswordCorrect) return res.status(400).json({message: "Invalid credentials"})
