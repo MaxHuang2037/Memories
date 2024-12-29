@@ -1,6 +1,8 @@
 # Memories
 An app built with the MERN stack that allows you to login and create posts for others to view, like, and comment
 
+[![Watch the video]](https://raw.githubusercontent.com/MaxHuang2037/Memories/main/video.mp4)
+
 ## Requirements
 
 This project was made with Node JS. Follow these steps to set up the project.
