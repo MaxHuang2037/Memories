@@ -1,7 +1,7 @@
 # Memories
 An app built with the MERN stack that allows you to login and create posts for others to view, like, and comment
 
-[![Video Title](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/8lxFJV3e32w)
+[![Watch the video](https://img.youtube.com/vi/8lxFJV3e32w/0.jpg)](https://www.youtube.com/watch?v=8lxFJV3e32w)
 
 ## Requirements
 
